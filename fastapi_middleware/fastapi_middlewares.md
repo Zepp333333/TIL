@@ -13,6 +13,9 @@ that in turn lead us to learn more about FastAPI Middlewares.
 The purpose of this note is to explore the impact of BaseHTTPMiddleware and ASGIMiddleware on FastAPI application
 performance and to share our learnings.
 
+Spoiler: this is how the performance of real-life production application may change depending the type of 
+middlewares we use to implement some common logic:
+![img_3.png](img_3.png)
 ## Background
 
 In FastAPI, middleware plays a crucial role in the request-response lifecycle, acting as a layer that processes requests
