@@ -25,6 +25,7 @@ That guide keeps a single Postgres instance healthy, and this one picks up when 
 5. [Rebalancing in Production](#rebalancing-in-production)
 6. [CDC during Rebalancing](#cdc-during-rebalancing)
 7. [Lessons Learned](#lessons-learned)
+8. [Recommended Reading](#recommended-reading)
 
 ## Our Context
 
@@ -453,3 +454,26 @@ Since then we watch both slots as closely as free disk.
 
 - **One size doesn't fit all.**
   If your clients need read-your-writes, or you have hard deletes and non-idempotent writes, a simple write pause may not be enough.
+
+## Recommended Reading
+
+### Books
+
+- **[Designing Data-Intensive Applications](https://www.amazon.com/dp/1098119061)** by Martin Kleppmann and Chris Riccomini (2nd edition, O'Reilly, 2026).
+  The chapters on replication, sharding, and stream processing explain the theory behind virtual shards, rebalancing, and CDC.
+- **[Software Architecture: The Hard Parts](https://www.amazon.com/dp/1492086894)** by Neal Ford, Mark Richards, Pramod Sadalage, and Zhamak Dehghani (O'Reilly, 2021).
+  It covers how to pull apart operational data and weigh the trade-offs of distributed data ownership.
+- **[NoSQL Distilled: A Brief Guide to the Emerging World of Polyglot Persistence](https://www.amazon.com/dp/0321826620)** by Pramod Sadalage and Martin Fowler (Addison-Wesley, 2012).
+  It is a short introduction to distribution models, sharding, and consistency trade-offs.
+  Martin Fowler's [Polyglot Persistence](https://martinfowler.com/bliki/PolyglotPersistence.html) note explains the idea in the title.
+- **[PostgreSQL 14 Internals](https://postgrespro.com/community/books/internals)** by Egor Rogov (Postgres Professional, 2023, free PDF).
+  It explains MVCC, vacuum, WAL, and index internals, which is where bloat and replication behavior come from.
+
+### Articles
+
+- **[Herding elephants: lessons learned from sharding Postgres at Notion](https://www.notion.com/blog/sharding-postgres-at-notion)** by Garrett Fidalgo (Notion, 2021).
+  Notion sharded Postgres in the application with logical shards and moved data with a dual write and a backfill.
+- **[The Great Re-shard: adding Postgres capacity (again) with zero downtime](https://www.notion.com/blog/the-great-re-shard)** by Arka Ganguli, Tanner Johnson, Ben Kraft, and Nathan Northcutt (Notion, 2023).
+  The follow-up post moves logical shards to new instances with logical replication, close to the rebalancing described here.
+- **[How Figma's databases team lived to tell the scale](https://www.figma.com/blog/how-figmas-databases-team-lived-to-tell-the-scale/)** by Sammy Steele (Figma, 2024).
+  Figma took a different path and built horizontal sharding into a query proxy in front of Postgres.
