@@ -2,6 +2,8 @@
 
 ![A Startup's Guide to Sharding Postgres](cover.png)
 
+*Originally published on [Medium](https://medium.com/gitconnected/a-startups-guide-to-sharding-postgres-3e8105489cde).*
+
 ## Intro
 
 Most projects begin with a single Postgres instance for data persistence, and that is the right call.
